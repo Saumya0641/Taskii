@@ -7,6 +7,7 @@ from app.schemas.user import UserCreate, UserResponse,UserUpdate
 from fastapi import HTTPException
 from app.models.task import Task
 from app.models.task_assignment import TaskAssignment
+from app.security import hash_password
 router = APIRouter(
     prefix="/users",
     tags=["Users"]
@@ -21,7 +22,7 @@ def create_user(
     new_user = User(
         name=user.name,
         email=user.email,
-        password=user.password,
+        password=hash_password(user.password),
         role="MEMBER"
     )
 

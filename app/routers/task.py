@@ -8,7 +8,8 @@ from app.schemas.task_assignment import TaskAssign
 from app.models.task_assignment import TaskAssignment
 from app.models.user import User
 from fastapi import HTTPException
-
+from app.dependencies import admin_required
+from app.dependencies import get_current_user
 router = APIRouter(
     prefix="/tasks",
     tags=["Tasks"]
@@ -17,6 +18,7 @@ router = APIRouter(
 @router.post("/", response_model=TaskResponse)
 def create_task(
     task: TaskCreate,
+    current_user = Depends(admin_required),
     db: Session = Depends(get_db)
 ):
     new_task = Task(
@@ -24,7 +26,7 @@ def create_task(
         description=task.description,
         priority=task.priority,
         deadline=task.deadline,
-        created_by=task.created_by
+        created_by=current_user.id
     )
 
     db.add(new_task)
@@ -89,6 +91,7 @@ def update_task(
 def assign_users(
     task_id: int,
     assignment: TaskAssign,
+    current_user = Depends(admin_required),
     db: Session = Depends(get_db)
 ):
     task = db.query(Task).filter(
@@ -156,6 +159,7 @@ def get_task_members(
 def update_task_status(
     task_id: int,
     status_data: TaskStatusUpdate,
+    current_user = Depends(get_current_user),
     db: Session = Depends(get_db)
 ):
     task = db.query(Task).filter(
@@ -176,4 +180,27 @@ def update_task_status(
     return {
         "message": "Status updated successfully",
         "status": task.status
+    }
+
+@router.delete("/{task_id}")
+def delete_task(
+    task_id: int,
+    current_user = Depends(admin_required),
+    db: Session = Depends(get_db)
+):
+    task = db.query(Task).filter(
+        Task.id == task_id
+    ).first()
+
+    if not task:
+        raise HTTPException(
+            status_code=404,
+            detail="Task not found"
+        )
+
+    db.delete(task)
+    db.commit()
+
+    return {
+        "message": "Task deleted successfully"
     }
