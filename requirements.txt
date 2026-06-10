@@ -1,4 +1,8 @@
- first step 
- pip install fastapi uvicorn sqlalchemy python-dotenv 
-
- uvicorn app.main:app --reload
+fastapi
+uvicorn
+sqlalchemy
+pydantic
+python-jose[cryptography]
+passlib[bcrypt]
+python-multipart
+email-validator
