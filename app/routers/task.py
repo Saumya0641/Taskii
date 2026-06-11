@@ -134,24 +134,16 @@ def get_task_members(
             detail="Task not found"
         )
 
-    assignments = db.query(TaskAssignment).filter(
-        TaskAssignment.task_id == task_id
-    ).all()
-
     members = []
 
-    for assignment in assignments:
-        user = db.query(User).filter(
-            User.id == assignment.user_id
-        ).first()
+    for assignment in task.assignments:
 
-        if user:
-            members.append({
-                "id": user.id,
-                "name": user.name,
-                "email": user.email,
-                "role": user.role
-            })
+        members.append({
+            "id": assignment.user.id,
+            "name": assignment.user.name,
+            "email": assignment.user.email,
+            "role": assignment.user.role
+        })
 
     return members
 

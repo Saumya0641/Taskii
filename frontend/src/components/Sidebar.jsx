@@ -11,12 +11,9 @@ import { UserPlus } from "lucide-react";
 function Sidebar() {
   return (
     <div className="w-64 bg-slate-900 text-white min-h-screen p-5">
-      <h2 className="text-xl font-bold mb-10">
-        Task Manager
-      </h2>
+      <h2 className="text-xl font-bold mb-10">Task Manager</h2>
 
       <div className="space-y-3">
-
         <Link
           to="/dashboard"
           className="flex gap-3 items-center p-3 rounded-lg hover:bg-slate-800"
@@ -41,14 +38,13 @@ function Sidebar() {
           <span>Members</span>
         </Link>
 
-       <Link
-  to="/assign-task"
-  className="flex gap-3 items-center p-3 rounded-lg hover:bg-slate-800"
->
-  <UserPlus size={20} />
-  <span>Assign Tasks</span>
-</Link>
-
+        <Link
+          to="/assign-task"
+          className="flex gap-3 items-center p-3 rounded-lg hover:bg-slate-800"
+        >
+          <UserPlus size={20} />
+          <span>Assign Tasks</span>
+        </Link>
 
         <Link
           to="/analytics"
@@ -65,8 +61,6 @@ function Sidebar() {
           <Settings size={20} />
           <span>Settings</span>
         </Link>
-
-
       </div>
     </div>
   );

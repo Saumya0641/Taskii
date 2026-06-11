@@ -22,20 +22,18 @@ function Tasks() {
     }
   };
   const handleDelete = async (taskId) => {
-  const confirmDelete = window.confirm(
-    "Delete this task?"
-  );
+    const confirmDelete = window.confirm("Delete this task?");
 
-  if (!confirmDelete) return;
+    if (!confirmDelete) return;
 
-  try {
-    await api.delete(`/tasks/${taskId}`);
+    try {
+      await api.delete(`/tasks/${taskId}`);
 
-    fetchTasks();
-  } catch (error) {
-    console.error(error);
-  }
-};
+      fetchTasks();
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <div className="bg-slate-100 min-h-screen">
@@ -45,16 +43,13 @@ function Tasks() {
         <Sidebar />
 
         <div className="flex-1 p-8">
-
           <div className="flex justify-between items-center mb-8">
             <div>
               <h1 className="text-4xl font-bold text-slate-800">
                 Task Management
               </h1>
 
-              <p className="text-slate-500 mt-2">
-                Manage and track all tasks.
-              </p>
+              <p className="text-slate-500 mt-2">Manage and track all tasks.</p>
             </div>
 
             <button
@@ -69,41 +64,24 @@ function Tasks() {
             <table className="w-full">
               <thead className="bg-slate-100">
                 <tr>
-                  <th className="p-4 text-left">
-                    Title
-                  </th>
+                  <th className="p-4 text-left">Title</th>
 
-                  <th className="p-4 text-left">
-                    Description
-                  </th>
+                  <th className="p-4 text-left">Description</th>
 
-                  <th className="p-4 text-left">
-                    Status
-                  </th>
+                  <th className="p-4 text-left">Status</th>
 
-                  <th className="p-4 text-left">
-                    Priority
-                  </th>
-                  <th className="p-4 text-left">
-                   Actions
-                  </th>
+                  <th className="p-4 text-left">Priority</th>
+                  <th className="p-4 text-left">Actions</th>
                 </tr>
               </thead>
 
               <tbody>
                 {tasks.length > 0 ? (
                   tasks.map((task) => (
-                    <tr
-                      key={task.id}
-                      className="border-b hover:bg-slate-50"
-                    >
-                      <td className="p-4 font-medium">
-                        {task.title}
-                      </td>
+                    <tr key={task.id} className="border-b hover:bg-slate-50">
+                      <td className="p-4 font-medium">{task.title}</td>
 
-                      <td className="p-4">
-                        {task.description}
-                      </td>
+                      <td className="p-4">{task.description}</td>
 
                       <td className="p-4">
                         <span className="bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-sm">
@@ -117,31 +95,24 @@ function Tasks() {
                         </span>
                       </td>
                       <td className="p-4">
-  <div className="flex gap-2">
+                        <div className="flex gap-2">
+                          <button className="bg-yellow-500 hover:bg-yellow-600 text-white px-3 py-1 rounded-lg">
+                            Edit
+                          </button>
 
-    <button
-      className="bg-yellow-500 hover:bg-yellow-600 text-white px-3 py-1 rounded-lg"
-    >
-      Edit
-    </button>
-
-   <button
-  onClick={() => handleDelete(task.id)}
-  className="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-lg"
->
-  Delete
-</button>
-
-  </div>
-</td>
+                          <button
+                            onClick={() => handleDelete(task.id)}
+                            className="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-lg"
+                          >
+                            Delete
+                          </button>
+                        </div>
+                      </td>
                     </tr>
                   ))
                 ) : (
                   <tr>
-                    <td
-                      colSpan="5"
-                      className="p-8 text-center text-slate-500"
-                    >
+                    <td colSpan="5" className="p-8 text-center text-slate-500">
                       No Tasks Found
                     </td>
                   </tr>
@@ -152,9 +123,7 @@ function Tasks() {
 
           <CreateTaskModal
             isOpen={openModal}
-            onClose={() =>
-              setOpenModal(false)
-            }
+            onClose={() => setOpenModal(false)}
             onTaskCreated={fetchTasks}
           />
         </div>

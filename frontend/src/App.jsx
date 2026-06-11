@@ -9,20 +9,21 @@ import Settings from "./pages/Settings";
 
 import ProtectedRoute from "./routes/ProtectedRoute";
 import AssignTask from "./pages/AssignTask";
+import MemberDashboard from "./pages/MemberDashboard";
+import Landing from "./pages/Landingpage.jsx";
+
 function App() {
   return (
     <BrowserRouter>
       <Routes>
+        <Route path="/" element={<Landing />} />
 
-        <Route
-          path="/"
-          element={<Login />}
-        />
+        <Route path="/login" element={<Login />} />
 
         <Route
           path="/dashboard"
           element={
-            <ProtectedRoute>
+            <ProtectedRoute allowedRole="ADMIN">
               <AdminDashboard />
             </ProtectedRoute>
           }
@@ -40,8 +41,17 @@ function App() {
         <Route
           path="/members"
           element={
-            <ProtectedRoute>
+            <ProtectedRoute allowedRole="ADMIN">
               <Members />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/member"
+          element={
+            <ProtectedRoute allowedRole="MEMBER">
+              <MemberDashboard />
             </ProtectedRoute>
           }
         />
@@ -64,14 +74,22 @@ function App() {
           }
         />
         <Route
-  path="/assign-task"
-  element={
-    <ProtectedRoute>
-      <AssignTask />
-    </ProtectedRoute>
-  }
-/>
+          path="/assign-task"
+          element={
+            <ProtectedRoute>
+              <AssignTask />
+            </ProtectedRoute>
+          }
+        />
 
+        <Route
+          path="/member"
+          element={
+            <ProtectedRoute>
+              <MemberDashboard />
+            </ProtectedRoute>
+          }
+        />
       </Routes>
     </BrowserRouter>
   );

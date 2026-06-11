@@ -6,6 +6,9 @@ from app.database import get_db
 from app.models.user import User
 from app.security import verify_token
 from fastapi import Depends, HTTPException
+import logging
+
+
 oauth2_scheme = OAuth2PasswordBearer(
     tokenUrl="/auth/login"
 )
@@ -15,11 +18,15 @@ def get_current_user(
     token: str = Depends(oauth2_scheme),
     db: Session = Depends(get_db)
 ):
-    print("TOKEN:", token)
+    # print("TOKEN:", token)
 
     payload = verify_token(token)
 
-    print("PAYLOAD:", payload)
+    # print("PAYLOAD:", payload)
+
+    logging.info(f"TOKEN: {token}")
+    logging.info(f"PAYLOAD: {payload}")
+   
 
     if not payload:
         raise HTTPException(

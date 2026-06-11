@@ -1,10 +1,19 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, EmailStr, Field
+# emailstr and field are used for email password validation
 
 
 class UserCreate(BaseModel):
-    name: str
-    email: str
-    password: str
+    name: str = Field(
+        min_length=1,
+        max_length=100
+    )
+
+    email: EmailStr
+
+    password: str = Field(
+        min_length=6,
+        max_length=100
+    )
 
 class UserUpdate(BaseModel):
     name: str

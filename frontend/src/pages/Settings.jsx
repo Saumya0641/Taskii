@@ -10,9 +10,7 @@ function Settings() {
         <Sidebar />
 
         <div className="flex-1 p-8">
-          <h1 className="text-4xl font-bold">
-            Settings
-          </h1>
+          <h1 className="text-4xl font-bold">Settings</h1>
         </div>
       </div>
     </div>

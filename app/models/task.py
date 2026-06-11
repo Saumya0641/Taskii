@@ -1,5 +1,6 @@
 from sqlalchemy import Column, Integer, String, Text, DateTime, ForeignKey
 from sqlalchemy.sql import func
+from sqlalchemy.orm import relationship
 
 from app.database import Base
 
@@ -42,7 +43,7 @@ class Task(Base):
 
     created_by = Column(
         Integer,
-        # ForeignKey("users.id"),
+        ForeignKey("users.id"),
         nullable=False
     )
 
@@ -55,4 +56,17 @@ class Task(Base):
         DateTime(timezone=True),
         server_default=func.now(),
         onupdate=func.now()
+    )
+
+    # Relationships
+
+    creator = relationship(
+        "User",
+        back_populates="created_tasks"
+    )
+
+    assignments = relationship(
+        "TaskAssignment",
+        back_populates="task",
+        cascade="all, delete-orphan"
     )

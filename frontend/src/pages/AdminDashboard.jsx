@@ -46,54 +46,35 @@ function AdminDashboard() {
           </div>
 
           <div className="grid grid-cols-4 gap-6">
-            <DashboardCard
-              title="Total Tasks"
-              value={stats.total_tasks}
-            />
+            <DashboardCard title="Total Tasks" value={stats.total_tasks} />
 
-            <DashboardCard
-              title="Pending Tasks"
-              value={stats.pending_tasks}
-            />
+            <DashboardCard title="Pending Tasks" value={stats.pending_tasks} />
 
             <DashboardCard
               title="Completed Tasks"
               value={stats.completed_tasks}
             />
 
-            <DashboardCard
-              title="Team Members"
-              value={stats.total_users}
-            />
+            <DashboardCard title="Team Members" value={stats.total_users} />
           </div>
 
           <div className="bg-white rounded-2xl shadow mt-8 p-6">
-            <h2 className="text-2xl font-semibold mb-4">
-              Recent Tasks
-            </h2>
+            <h2 className="text-2xl font-semibold mb-4">Recent Tasks</h2>
 
             <table className="w-full">
               <thead>
                 <tr className="border-b">
-                  <th className="text-left py-3">
-                    Task
-                  </th>
+                  <th className="text-left py-3">Task</th>
 
-                  <th className="text-left py-3">
-                    Status
-                  </th>
+                  <th className="text-left py-3">Status</th>
 
-                  <th className="text-left py-3">
-                    Priority
-                  </th>
+                  <th className="text-left py-3">Priority</th>
                 </tr>
               </thead>
 
               <tbody>
                 <tr className="border-b">
-                  <td className="py-4">
-                    Build Login Page
-                  </td>
+                  <td className="py-4">Build Login Page</td>
 
                   <td>
                     <span className="bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm">
@@ -109,9 +90,7 @@ function AdminDashboard() {
                 </tr>
 
                 <tr className="border-b">
-                  <td className="py-4">
-                    Implement JWT
-                  </td>
+                  <td className="py-4">Implement JWT</td>
 
                   <td>
                     <span className="bg-yellow-100 text-yellow-700 px-3 py-1 rounded-full text-sm">
@@ -127,9 +106,7 @@ function AdminDashboard() {
                 </tr>
 
                 <tr>
-                  <td className="py-4">
-                    Create Dashboard
-                  </td>
+                  <td className="py-4">Create Dashboard</td>
 
                   <td>
                     <span className="bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-sm">

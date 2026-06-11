@@ -3,6 +3,8 @@ from sqlalchemy.sql import func
 
 from app.database import Base
 
+from sqlalchemy.orm import relationship
+
 
 
 class User(Base):
@@ -39,4 +41,14 @@ class User(Base):
     created_at = Column(
         DateTime(timezone=True),
         server_default=func.now()
+    )
+    assignments = relationship(
+        "TaskAssignment",
+        back_populates="user",
+        cascade="all, delete-orphan"
+    )
+
+    created_tasks = relationship(
+        "Task",
+        back_populates="creator"
     )
